@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@utility container {
+  @apply mx-auto;
+}
+
+@utility center {
+  @apply flex items-center justify-center;
+}
