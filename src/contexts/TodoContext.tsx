@@ -15,8 +15,9 @@ function TodoProvider({ children }) {
   const [allTodo, setAllTodo] = useState([]);
 
   const deleteHandler = (id: string) => {
-    const todos = allTodo.filter((item) => item !== id);
+    const todos = allTodo.filter((item) => item.id !== id);
     console.log(todos);
+    setAllTodo(todos);
   };
 
   return <TodoContext.Provider value={{ allTodo, setAllTodo, deleteHandler }}>{children}</TodoContext.Provider>;
