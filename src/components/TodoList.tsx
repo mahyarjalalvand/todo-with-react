@@ -1,12 +1,13 @@
+import type { FilterType } from "../App";
 import useTodo from "../hooks/useTodo";
 import TodoItem from "./TodoItem";
 
-function TodoList() {
+function TodoList({ filter }: { filter: FilterType }) {
   const { allTodo } = useTodo();
   return (
-    <div className="w-full border border-gray-300 rounded-lg py-6 px-3">
+    <div className="w-full border border-gray-300 rounded-lg p-6">
       {allTodo.length ? (
-        <ul>
+        <ul className="flex flex-col gap-5">
           {allTodo.map((item) => (
             <TodoItem key={item.id} item={item} />
           ))}
