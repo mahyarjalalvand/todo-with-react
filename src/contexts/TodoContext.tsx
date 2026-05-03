@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 export interface TodoType {
   id: string;
   title: string;
@@ -12,11 +12,13 @@ interface TodoContextType {
 
 export const TodoContext = createContext<TodoContextType | undefined>(undefined);
 function TodoProvider({ children }) {
-  const [allTodo, setAllTodo] = useState([]);
-
+  const [allTodo, setAllTodo] = useState<TodoType[]>([]);
+  useEffect(() => {
+    localStorage.setItem("todos", allTodo);
+    console.log(allTodo);
+  }, [allTodo]);
   const deleteHandler = (id: string) => {
     const todos = allTodo.filter((item) => item.id !== id);
-    console.log(todos);
     setAllTodo(todos);
   };
 
