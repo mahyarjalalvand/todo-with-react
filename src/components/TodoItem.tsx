@@ -1,15 +1,26 @@
 import type { TodoType } from "../contexts/TodoContext";
+import useTodo from "../hooks/useTodo";
 
 function TodoItem({ item }: { item: TodoType }) {
+  const { setAllTodo, deleteHandler } = useTodo();
+
+  const toggleCheckbox = () => {
+    setAllTodo((prv) => prv.map((prvTodo) => (prvTodo.id === item.id ? { ...prvTodo, isCompleted: !prvTodo.isCompleted } : prvTodo)));
+  };
+
   return (
     <li>
       <div className="flex justify-between items-center">
         <span className="cursor-pointer">{item.title}</span>
-        <div>
-          <div></div>
-          <div className="flex items-center gap-4 ">
-            <button>حذف</button>
-            <button>ویرایش</button>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <input type="checkbox" name="status" id="status" onChange={toggleCheckbox} checked={item.isCompleted} />
+          </div>
+          <div className="flex items-center gap-4 [&_button]:text-white [&_button]:px-3 [&_button]:rounded-lg [&_button]:py-1 [&_button]:cursor-pointer">
+            <button onClick={() => deleteHandler(item.id)} className="bg-red-500">
+              حذف
+            </button>
+            <button className="bg-amber-400">ویرایش</button>
           </div>
         </div>
       </div>
