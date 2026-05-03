@@ -6,7 +6,7 @@ export interface TodoType {
 }
 interface TodoContextType {
   allTodo: TodoType[];
-  setAllTodo: React.Dispatch<React.SetStateAction>;
+  setAllTodo: React.Dispatch<React.SetStateAction<TodoType[]>>;
   deleteHandler: (id: string) => void;
 }
 
