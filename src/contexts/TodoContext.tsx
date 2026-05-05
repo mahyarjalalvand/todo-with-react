@@ -12,10 +12,13 @@ interface TodoContextType {
 
 export const TodoContext = createContext<TodoContextType | undefined>(undefined);
 function TodoProvider({ children }) {
-  const [allTodo, setAllTodo] = useState<TodoType[]>([]);
+  const [allTodo, setAllTodo] = useState<TodoType[]>(() => {
+    const savedData = localStorage.getItem("todos");
+    return savedData ? JSON.parse(savedData) : [];
+  });
   useEffect(() => {
-    localStorage.setItem("todos", allTodo);
-    console.log(allTodo);
+    localStorage.setItem("todos", JSON.stringify(allTodo));
+    // console.log(allTodo);
   }, [allTodo]);
   const deleteHandler = (id: string) => {
     const todos = allTodo.filter((item) => item.id !== id);
