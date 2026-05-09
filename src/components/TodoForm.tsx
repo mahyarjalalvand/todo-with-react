@@ -7,7 +7,8 @@ function TodoForm() {
   const { setAllTodo } = useTodo();
   const [todo, setTodo] = useState<string>("");
   const allTodoHandler = () => {
-    const todoItem: TodoType = { id: v4(), title: todo, isCompleted: false };
+    if (!todo.trim()) return;
+    const todoItem: TodoType = { id: v4(), title: todo.trim(), isCompleted: false };
     setAllTodo((prv) => [...prv, todoItem]);
     setTodo("");
   };
