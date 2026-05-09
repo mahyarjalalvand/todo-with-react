@@ -2,10 +2,14 @@ import type { TodoType } from "../contexts/TodoContext";
 import useTodo from "../hooks/useTodo";
 
 function TodoItem({ item }: { item: TodoType }) {
-  const { setAllTodo, deleteHandler } = useTodo();
+  const { setAllTodo, deleteHandler, setEditTodo } = useTodo();
 
   const toggleCheckbox = () => {
     setAllTodo((prv) => prv.map((prvTodo) => (prvTodo.id === item.id ? { ...prvTodo, isCompleted: !prvTodo.isCompleted } : prvTodo)));
+  };
+
+  const editHandler = () => {
+    setEditTodo(item);
   };
 
   return (
@@ -20,7 +24,9 @@ function TodoItem({ item }: { item: TodoType }) {
             <button onClick={() => deleteHandler(item.id)} className="bg-red-500">
               حذف
             </button>
-            <button className="bg-amber-400">ویرایش</button>
+            <button className="bg-amber-400" onClick={editHandler}>
+              ویرایش
+            </button>
           </div>
         </div>
       </div>
