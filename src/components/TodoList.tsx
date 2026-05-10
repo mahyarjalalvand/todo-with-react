@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { FilterType } from "../App";
 import useTodo from "../hooks/useTodo";
 import TodoItem from "./TodoItem";

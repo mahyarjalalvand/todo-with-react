@@ -10,6 +10,8 @@ interface TodoContextType {
   deleteHandler: (id: string) => void;
   editTodo: TodoType | null;
   setEditTodo: React.Dispatch<React.SetStateAction<TodoType | null>>;
+  todo: string;
+  setTodo: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const TodoContext = createContext<TodoContextType | undefined>(undefined);
@@ -20,6 +22,7 @@ function TodoProvider({ children }) {
   });
   const [editTodo, setEditTodo] = useState<TodoType | null>(null);
 
+  const [todo, setTodo] = useState<string>("");
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(allTodo));
   }, [allTodo]);
@@ -28,7 +31,7 @@ function TodoProvider({ children }) {
     setAllTodo(todos);
   };
 
-  return <TodoContext.Provider value={{ allTodo, setAllTodo, deleteHandler, editTodo, setEditTodo }}>{children}</TodoContext.Provider>;
+  return <TodoContext.Provider value={{ allTodo, setAllTodo, deleteHandler, editTodo, setEditTodo, todo, setTodo }}>{children}</TodoContext.Provider>;
 }
 
 export default TodoProvider;
