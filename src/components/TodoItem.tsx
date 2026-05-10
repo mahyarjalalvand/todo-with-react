@@ -2,7 +2,7 @@ import type { TodoType } from "../contexts/TodoContext";
 import useTodo from "../hooks/useTodo";
 
 function TodoItem({ item }: { item: TodoType }) {
-  const { setAllTodo, deleteHandler, setEditTodo } = useTodo();
+  const { setAllTodo, deleteHandler, setEditTodo, setTodo } = useTodo();
 
   const toggleCheckbox = () => {
     setAllTodo((prv) => prv.map((prvTodo) => (prvTodo.id === item.id ? { ...prvTodo, isCompleted: !prvTodo.isCompleted } : prvTodo)));
@@ -10,6 +10,7 @@ function TodoItem({ item }: { item: TodoType }) {
 
   const editHandler = () => {
     setEditTodo(item);
+    setTodo(item.title);
   };
 
   return (
