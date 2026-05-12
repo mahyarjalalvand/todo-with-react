@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useTodo from "../hooks/useTodo";
 import { v4 } from "uuid";
 import type { TodoType } from "../contexts/TodoContext";
